@@ -279,35 +279,6 @@
             border-color: #999;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .hearts {
-            position: fixed;
-            pointer-events: none;
-            font-size: 2em;
-            animation: float 3s ease-in forwards;
-        }
-
-        @keyframes float {
-            0% {
-                opacity: 1;
-                transform: translateY(0) translateX(0) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-300px) translateX(100px) rotate(360deg);
-            }
-        }
-
         .slide-indicator {
             position: absolute;
             bottom: 20px;
@@ -329,15 +300,6 @@
         .dot.active {
             background: #667eea;
             transform: scale(1.2);
-        }
-
-        .nav-buttons {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
         }
 
         .nav-btn {
@@ -400,9 +362,9 @@
                 <div class="letter-content">
                     Coucou,<br><br>
                     J'ai une belle surprise à te proposer...<br><br>
-                    Ouvre cette lettre pour découvrir ! 💌
+                    Ouvre cette lettre pour découvrir !
                 </div>
-                <div class="letter-seal">💌</div>
+                <div class="letter-seal">📬</div>
             </div>
 
             <div class="click-instruction">
@@ -419,7 +381,7 @@
             <p style="font-size: 1.1em; color: #666; margin-top: 20px;">J'ai une proposition spéciale pour toi...</p>
             
             <div class="buttons-container">
-                <button class="btn-yes" onclick="answerQuestion(true)">OUI ! 💚</button>
+                <button class="btn-yes" onclick="answerQuestion(true)">Oui !</button>
                 <button class="btn-no" id="noBtn-1" onmouseover="moveButton(1)" ontouchstart="moveButton(1)">Non</button>
             </div>
         </div>
@@ -437,7 +399,7 @@
             </div>
             
             <div class="buttons-container">
-                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui !</button>
                 <button class="btn-no" id="noBtn-2" onmouseover="moveButton(2)" ontouchstart="moveButton(2)">Non</button>
             </div>
         </div>
@@ -455,7 +417,7 @@
             </div>
             
             <div class="buttons-container">
-                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui !</button>
                 <button class="btn-no" id="noBtn-3" onmouseover="moveButton(3)" ontouchstart="moveButton(3)">Non</button>
             </div>
         </div>
@@ -473,7 +435,7 @@
             </div>
             
             <div class="buttons-container">
-                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui !</button>
                 <button class="btn-no" id="noBtn-4" onmouseover="moveButton(4)" ontouchstart="moveButton(4)">Non</button>
             </div>
         </div>
@@ -491,20 +453,18 @@
             </div>
             
             <div class="buttons-container">
-                <button class="btn-yes" onclick="goToEnd()">Oui ! 💚</button>
+                <button class="btn-yes" onclick="goToEnd()">Oui !</button>
                 <button class="btn-no" id="noBtn-5" onmouseover="moveButton(5)" ontouchstart="moveButton(5)">Non</button>
             </div>
         </div>
 
         <!-- Slide 6: Message Final -->
         <div class="slide slide-6">
-            <h1>✨ Merci ! ✨</h1>
-            <div class="emoji">💕</div>
+            <h1>✨ Merci ✨</h1>
+            <div class="emoji">🎉</div>
             <div style="font-size: 1.3em; color: #667eea; margin: 30px 0;">
-                C'est génial ! Je suis tellement heureux !<br><br>À bientôt pour cette aventure magique ! 🎉
+                Merci d'avoir accepté de ton plein gré à toutes les activités proposées 😉
             </div>
-            
-            <button class="nav-btn" onclick="goToStart()">Retour au début</button>
         </div>
 
         <!-- Indicateurs de slide -->
@@ -564,10 +524,6 @@
             showSlide(n);
         }
 
-        function goToStart() {
-            showSlide(0);
-        }
-
         function goToEnd() {
             showSlide(totalSlides - 1);
         }
@@ -603,19 +559,6 @@
             } else {
                 moveButton(1);
             }
-        }
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('hearts');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * window.innerWidth + 'px';
-            heart.style.top = window.innerHeight + 'px';
-            document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 3000);
         }
 
         // Empêcher les boutons "Non" d'être cliqués
