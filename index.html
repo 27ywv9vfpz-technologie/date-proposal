@@ -69,6 +69,81 @@
             }
         }
 
+        /* Slide 0: Albatros avec lettre */
+        .slide-0 {
+            position: relative;
+        }
+
+        .albatros {
+            font-size: 5em;
+            animation: fly 3s ease-in-out infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes fly {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(30px) translateY(-20px);
+            }
+        }
+
+        .letter {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 30px 20px;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .letter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .letter-content {
+            color: #333;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .letter-seal {
+            font-size: 2em;
+            margin-top: 15px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .click-instruction {
+            color: #667eea;
+            font-size: 0.95em;
+            margin-top: 15px;
+            font-style: italic;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
         h1 {
             color: #667eea;
             font-size: 2.5em;
@@ -204,22 +279,6 @@
             border-color: #999;
         }
 
-        .message {
-            display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background: #d4edda;
-            border: 2px solid #28a745;
-            border-radius: 10px;
-            color: #155724;
-            font-size: 1.3em;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .message.show {
-            display: block;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -323,13 +382,36 @@
             .slide-1 .location {
                 font-size: 1.2em;
             }
+
+            .albatros {
+                font-size: 3.5em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="slides-container">
+        <!-- Slide 0: Albatros avec lettre -->
+        <div class="slide slide-0 active">
+            <div class="albatros">🦅</div>
+            <h1>Un Message Pour Toi ✨</h1>
+            
+            <div class="letter" onclick="unlockLetter()">
+                <div class="letter-content">
+                    Coucou,<br><br>
+                    J'ai une belle surprise à te proposer...<br><br>
+                    Ouvre cette lettre pour découvrir ! 💌
+                </div>
+                <div class="letter-seal">💌</div>
+            </div>
+
+            <div class="click-instruction">
+                👆 Clique sur la lettre pour continuer
+            </div>
+        </div>
+
         <!-- Slide 1: Date et Lieu -->
-        <div class="slide slide-1 active">
+        <div class="slide slide-1">
             <div class="icon">🌊</div>
             <h2>Tu es libre ?</h2>
             <div class="date">10 Septembre</div>
@@ -338,29 +420,29 @@
             
             <div class="buttons-container">
                 <button class="btn-yes" onclick="answerQuestion(true)">OUI ! 💚</button>
-                <button class="btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">Non</button>
+                <button class="btn-no" id="noBtn-1" onmouseover="moveButton(1)" ontouchstart="moveButton(1)">Non</button>
             </div>
         </div>
 
-        <!-- Slide 2: Sortie en mer -->
+        <!-- Slide 2: Sortie en mer (Après-midi) -->
         <div class="slide slide-2">
             <div class="emoji">⛵</div>
-            <h1>Le Matin</h1>
+            <h1>L'Après-midi</h1>
             <div class="program-item">
                 <div class="emoji-item">⛵</div>
                 <div class="text">
-                    <strong>Une sortie en mer magique</strong>
+                    <strong>Sortie en mer magique</strong>
                     Une croisière sur mon super yacht. N'oublie pas ta combinaison pour explorer l'eau !
                 </div>
             </div>
             
             <div class="buttons-container">
-                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
-                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-no" id="noBtn-2" onmouseover="moveButton(2)" ontouchstart="moveButton(2)">Non</button>
             </div>
         </div>
 
-        <!-- Slide 3: Exploration aquatique -->
+        <!-- Slide 3: Exploration aquatique (Après-midi) -->
         <div class="slide slide-3">
             <div class="emoji">🏊</div>
             <h1>Exploration Aquatique</h1>
@@ -373,33 +455,33 @@
             </div>
             
             <div class="buttons-container">
-                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
-                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-no" id="noBtn-3" onmouseover="moveButton(3)" ontouchstart="moveButton(3)">Non</button>
             </div>
         </div>
 
-        <!-- Slide 4: Déjeuner -->
+        <!-- Slide 4: Repas le soir -->
         <div class="slide slide-4">
             <div class="emoji">🍽️</div>
-            <h1>Le Midi</h1>
+            <h1>Le Soir</h1>
             <div class="program-item">
                 <div class="emoji-item">🍽️</div>
                 <div class="text">
                     <strong>Restaurant trois étoiles</strong>
-                    Un déjeuner gastronomique dans un établissement d'exception. Raffinement et saveurs exquises t'attendent !
+                    Un dîner gastronomique dans un établissement d'exception. Raffinement et saveurs exquises t'attendent !
                 </div>
             </div>
             
             <div class="buttons-container">
-                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
-                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+                <button class="btn-yes" onclick="nextSlide()">Oui ! 💚</button>
+                <button class="btn-no" id="noBtn-4" onmouseover="moveButton(4)" ontouchstart="moveButton(4)">Non</button>
             </div>
         </div>
 
         <!-- Slide 5: Promenade digestive -->
         <div class="slide slide-5">
             <div class="emoji">🚶</div>
-            <h1>L'Après-midi</h1>
+            <h1>Après le Dîner</h1>
             <div class="program-item">
                 <div class="emoji-item">🚶</div>
                 <div class="text">
@@ -409,8 +491,8 @@
             </div>
             
             <div class="buttons-container">
-                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
-                <button class="nav-btn" onclick="goToEnd()">Terminer →</button>
+                <button class="btn-yes" onclick="goToEnd()">Oui ! 💚</button>
+                <button class="btn-no" id="noBtn-5" onmouseover="moveButton(5)" ontouchstart="moveButton(5)">Non</button>
             </div>
         </div>
 
@@ -426,19 +508,20 @@
         </div>
 
         <!-- Indicateurs de slide -->
-        <div class="slide-indicator">
+        <div class="slide-indicator" id="slide-indicator">
             <div class="dot active" onclick="goToSlide(0)"></div>
             <div class="dot" onclick="goToSlide(1)"></div>
             <div class="dot" onclick="goToSlide(2)"></div>
             <div class="dot" onclick="goToSlide(3)"></div>
             <div class="dot" onclick="goToSlide(4)"></div>
             <div class="dot" onclick="goToSlide(5)"></div>
+            <div class="dot" onclick="goToSlide(6)"></div>
         </div>
     </div>
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 6;
+        const totalSlides = 7;
 
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
@@ -458,11 +541,14 @@
             slides[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
 
-            // Réinitialiser le bouton "Non" à chaque slide
-            if (currentSlide === 0) {
-                document.getElementById('noBtn').style.position = 'absolute';
-                document.getElementById('noBtn').style.left = 'auto';
-                document.getElementById('noBtn').style.top = 'auto';
+            // Réinitialiser la position du bouton "Non" pour chaque slide
+            for (let i = 1; i < totalSlides; i++) {
+                const btn = document.getElementById(`noBtn-${i}`);
+                if (btn) {
+                    btn.style.position = 'absolute';
+                    btn.style.left = 'auto';
+                    btn.style.top = 'auto';
+                }
             }
         }
 
@@ -483,16 +569,20 @@
         }
 
         function goToEnd() {
-            showSlide(5);
+            showSlide(totalSlides - 1);
         }
 
-        function moveButton() {
-            if (currentSlide !== 0) return; // Le bouton ne bouge que sur la slide 1
+        function unlockLetter() {
+            nextSlide();
+        }
 
-            const btn = document.getElementById('noBtn');
+        function moveButton(slideNum) {
+            const btn = document.getElementById(`noBtn-${slideNum}`);
+            if (!btn) return;
+
             const container = document.querySelector('.slides-container');
-            const maxX = container.offsetWidth - 100;
-            const maxY = container.offsetHeight - 80;
+            const maxX = container.offsetWidth - 150;
+            const maxY = container.offsetHeight - 120;
             
             const x = Math.random() * maxX;
             const y = Math.random() * maxY;
@@ -511,7 +601,7 @@
             if (answer) {
                 nextSlide();
             } else {
-                moveButton();
+                moveButton(1);
             }
         }
 
@@ -528,11 +618,16 @@
             }, 3000);
         }
 
-        // Empêcher le bouton "Non" d'être cliqué
-        document.getElementById('noBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            moveButton();
-        });
+        // Empêcher les boutons "Non" d'être cliqués
+        for (let i = 1; i < totalSlides; i++) {
+            const btn = document.getElementById(`noBtn-${i}`);
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    moveButton(i);
+                });
+            }
+        }
 
         // Initialiser
         showSlide(0);
