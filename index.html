@@ -21,14 +21,20 @@
             padding: 20px;
         }
 
-        .container {
+        .slides-container {
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
+            width: 100%;
             padding: 50px 40px;
             text-align: center;
             animation: slideIn 0.8s ease-out;
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         @keyframes slideIn {
@@ -39,6 +45,27 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
 
@@ -73,21 +100,39 @@
             }
         }
 
-        .program {
-            text-align: left;
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border-left: 5px solid #667eea;
+        /* Slide 1 - Date et Lieu */
+        .slide-1 h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin: 20px 0;
         }
 
+        .slide-1 .date {
+            color: #764ba2;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .slide-1 .location {
+            color: #666;
+            font-size: 1.4em;
+            margin: 20px 0;
+        }
+
+        .slide-1 .icon {
+            font-size: 3.5em;
+            margin: 20px 0;
+        }
+
+        /* Slides 2+ */
         .program-item {
             display: flex;
             align-items: start;
             margin: 20px 0;
             font-size: 1.1em;
             color: #333;
+            justify-content: center;
         }
 
         .program-item .emoji-item {
@@ -98,6 +143,7 @@
 
         .program-item .text {
             flex: 1;
+            text-align: left;
         }
 
         .program-item .text strong {
@@ -113,6 +159,7 @@
             margin-top: 40px;
             min-height: 60px;
             position: relative;
+            width: 100%;
         }
 
         .btn-yes {
@@ -145,7 +192,7 @@
             padding: 15px 40px;
             font-size: 1.1em;
             border-radius: 50px;
-            cursor: pointer;
+            cursor: not-allowed;
             transition: all 0.1s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: absolute;
@@ -201,87 +248,270 @@
                 transform: translateY(-300px) translateX(100px) rotate(360deg);
             }
         }
+
+        .slide-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        .nav-buttons {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .slides-container {
+                min-height: 400px;
+                padding: 30px 20px;
+            }
+
+            .slide-1 h2 {
+                font-size: 1.8em;
+            }
+
+            .slide-1 .date {
+                font-size: 1.4em;
+            }
+
+            .slide-1 .location {
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>✨ Une Proposition Spéciale ✨</h1>
-        <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">Je voudrais te proposer une journée inoubliable...</p>
+    <div class="slides-container">
+        <!-- Slide 1: Date et Lieu -->
+        <div class="slide slide-1 active">
+            <div class="icon">🌊</div>
+            <h2>Tu es libre ?</h2>
+            <div class="date">10 Septembre</div>
+            <div class="location">📍 Crozon</div>
+            <p style="font-size: 1.1em; color: #666; margin-top: 20px;">J'ai une proposition spéciale pour toi...</p>
+            
+            <div class="buttons-container">
+                <button class="btn-yes" onclick="answerQuestion(true)">OUI ! 💚</button>
+                <button class="btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">Non</button>
+            </div>
+        </div>
 
-        <div class="emoji">🌊</div>
-
-        <div class="program">
+        <!-- Slide 2: Sortie en mer -->
+        <div class="slide slide-2">
+            <div class="emoji">⛵</div>
+            <h1>Le Matin</h1>
             <div class="program-item">
                 <div class="emoji-item">⛵</div>
                 <div class="text">
-                    <strong>Le matin : Une sortie en mer</strong>
-                    Une croisière magique sur mon super yacht. N'oublie pas ta combinaison pour explorer l'eau !
+                    <strong>Une sortie en mer magique</strong>
+                    Une croisière sur mon super yacht. N'oublie pas ta combinaison pour explorer l'eau !
                 </div>
             </div>
+            
+            <div class="buttons-container">
+                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
+                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+            </div>
+        </div>
 
+        <!-- Slide 3: Exploration aquatique -->
+        <div class="slide slide-3">
+            <div class="emoji">🏊</div>
+            <h1>Exploration Aquatique</h1>
             <div class="program-item">
                 <div class="emoji-item">🏊</div>
                 <div class="text">
-                    <strong>Activité : Exploration aquatique</strong>
-                    Des affaires de bain et une combinaison pour découvrir les merveilles sous-marines ensemble.
+                    <strong>Activité : Découverte sous-marine</strong>
+                    Des affaires de bain et une combinaison pour découvrir les merveilles sous-marines ensemble. Apporte tes affaires pour l'eau !
                 </div>
             </div>
+            
+            <div class="buttons-container">
+                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
+                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+            </div>
+        </div>
 
+        <!-- Slide 4: Déjeuner -->
+        <div class="slide slide-4">
+            <div class="emoji">🍽️</div>
+            <h1>Le Midi</h1>
             <div class="program-item">
                 <div class="emoji-item">🍽️</div>
                 <div class="text">
-                    <strong>Le midi : Restaurant trois étoiles</strong>
-                    Un déjeuner gastronomique dans un établissement d'exception. Raffinement et saveurs exquises.
+                    <strong>Restaurant trois étoiles</strong>
+                    Un déjeuner gastronomique dans un établissement d'exception. Raffinement et saveurs exquises t'attendent !
                 </div>
             </div>
+            
+            <div class="buttons-container">
+                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
+                <button class="nav-btn" onclick="nextSlide()">Suivant →</button>
+            </div>
+        </div>
 
+        <!-- Slide 5: Promenade digestive -->
+        <div class="slide slide-5">
+            <div class="emoji">🚶</div>
+            <h1>L'Après-midi</h1>
             <div class="program-item">
                 <div class="emoji-item">🚶</div>
                 <div class="text">
-                    <strong>L'après-midi : Promenade digestive</strong>
-                    Une petite balade relaxante pour profiter du moment et savourer cette journée ensemble.
+                    <strong>Promenade digestive</strong>
+                    Une petite balade relaxante pour profiter du moment et savourer cette journée ensemble. Un moment magique t'attend !
                 </div>
+            </div>
+            
+            <div class="buttons-container">
+                <button class="nav-btn" onclick="previousSlide()">← Précédent</button>
+                <button class="nav-btn" onclick="goToEnd()">Terminer →</button>
             </div>
         </div>
 
-        <p style="font-size: 1.1em; color: #667eea; margin: 30px 0; font-weight: bold;">Alors, tu dis oui ? 💕</p>
-
-        <div class="buttons-container">
-            <button class="btn-yes" onclick="sayYes()">OUI ! 💚</button>
-            <button class="btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">Non</button>
+        <!-- Slide 6: Message Final -->
+        <div class="slide slide-6">
+            <h1>✨ Merci ! ✨</h1>
+            <div class="emoji">💕</div>
+            <div style="font-size: 1.3em; color: #667eea; margin: 30px 0;">
+                C'est génial ! Je suis tellement heureux !<br><br>À bientôt pour cette aventure magique ! 🎉
+            </div>
+            
+            <button class="nav-btn" onclick="goToStart()">Retour au début</button>
         </div>
 
-        <div class="message" id="message">
-            🎉 C'est génial ! Je suis tellement heureux ! À bientôt pour cette aventure ! 🎉
+        <!-- Indicateurs de slide -->
+        <div class="slide-indicator">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
         </div>
     </div>
 
     <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+
+            if (n >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            } else if (n < 0) {
+                currentSlide = 0;
+            } else {
+                currentSlide = n;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            // Réinitialiser le bouton "Non" à chaque slide
+            if (currentSlide === 0) {
+                document.getElementById('noBtn').style.position = 'absolute';
+                document.getElementById('noBtn').style.left = 'auto';
+                document.getElementById('noBtn').style.top = 'auto';
+            }
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(n) {
+            showSlide(n);
+        }
+
+        function goToStart() {
+            showSlide(0);
+        }
+
+        function goToEnd() {
+            showSlide(5);
+        }
+
         function moveButton() {
+            if (currentSlide !== 0) return; // Le bouton ne bouge que sur la slide 1
+
             const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
+            const container = document.querySelector('.slides-container');
+            const maxX = container.offsetWidth - 100;
+            const maxY = container.offsetHeight - 80;
             
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            btn.style.position = 'absolute';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
             
-            // Ajouter un petit son/feedback
             btn.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 btn.style.transform = 'scale(1)';
             }, 100);
         }
 
-        function sayYes() {
-            document.getElementById('message').classList.add('show');
-            document.querySelector('.btn-yes').disabled = true;
-            document.getElementById('noBtn').style.display = 'none';
-            
-            // Créer des cœurs qui flottent
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    createHeart();
-                }, i * 100);
+        function answerQuestion(answer) {
+            if (answer) {
+                nextSlide();
+            } else {
+                moveButton();
             }
         }
 
@@ -303,6 +533,9 @@
             e.preventDefault();
             moveButton();
         });
+
+        // Initialiser
+        showSlide(0);
     </script>
 </body>
 </html>
