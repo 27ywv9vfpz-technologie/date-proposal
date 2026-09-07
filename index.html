@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une Proposition Spéciale ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            padding: 50px 40px;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+            }
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .program {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .program-item {
+            display: flex;
+            align-items: start;
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .program-item .emoji-item {
+            font-size: 2em;
+            margin-right: 15px;
+            min-width: 40px;
+        }
+
+        .program-item .text {
+            flex: 1;
+        }
+
+        .program-item .text strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            z-index: 10;
+            position: relative;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        .btn-no {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            z-index: 5;
+        }
+
+        .btn-no:hover {
+            background: #e8e8e8;
+            border-color: #999;
+        }
+
+        .message {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            color: #155724;
+            font-size: 1.3em;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2em;
+            animation: float 3s ease-in forwards;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-300px) translateX(100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Une Proposition Spéciale ✨</h1>
+        <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">Je voudrais te proposer une journée inoubliable...</p>
+
+        <div class="emoji">🌊</div>
+
+        <div class="program">
+            <div class="program-item">
+                <div class="emoji-item">⛵</div>
+                <div class="text">
+                    <strong>Le matin : Une sortie en mer</strong>
+                    Une croisière magique sur mon super yacht. N'oublie pas ta combinaison pour explorer l'eau !
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="emoji-item">🏊</div>
+                <div class="text">
+                    <strong>Activité : Exploration aquatique</strong>
+                    Des affaires de bain et une combinaison pour découvrir les merveilles sous-marines ensemble.
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="emoji-item">🍽️</div>
+                <div class="text">
+                    <strong>Le midi : Restaurant trois étoiles</strong>
+                    Un déjeuner gastronomique dans un établissement d'exception. Raffinement et saveurs exquises.
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="emoji-item">🚶</div>
+                <div class="text">
+                    <strong>L'après-midi : Promenade digestive</strong>
+                    Une petite balade relaxante pour profiter du moment et savourer cette journée ensemble.
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 1.1em; color: #667eea; margin: 30px 0; font-weight: bold;">Alors, tu dis oui ? 💕</p>
+
+        <div class="buttons-container">
+            <button class="btn-yes" onclick="sayYes()">OUI ! 💚</button>
+            <button class="btn-no" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">Non</button>
+        </div>
+
+        <div class="message" id="message">
+            🎉 C'est génial ! Je suis tellement heureux ! À bientôt pour cette aventure ! 🎉
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            
+            // Ajouter un petit son/feedback
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function sayYes() {
+            document.getElementById('message').classList.add('show');
+            document.querySelector('.btn-yes').disabled = true;
+            document.getElementById('noBtn').style.display = 'none';
+            
+            // Créer des cœurs qui flottent
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('hearts');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Empêcher le bouton "Non" d'être cliqué
+        document.getElementById('noBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+    </script>
+</body>
+</html>
